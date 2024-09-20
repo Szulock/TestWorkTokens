@@ -1,4 +1,4 @@
-package logger
+package loggerer
 
 import "github.com/sirupsen/logrus"
 
@@ -12,7 +12,6 @@ func NewLogger() *logrus.Logger {
 		FullTimestamp: true,
 	})
 
-	// Устанавливаю уровень логирования
 	logger.SetLevel(logrus.InfoLevel)
 
 	return logger

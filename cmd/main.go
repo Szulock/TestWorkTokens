@@ -1,8 +1,9 @@
 package main
 
 import (
-	"TokenTestWork/internal/logger"
-	"TokenTestWork/internal/middleware"
+	"TokenTestWork/internal/handlers"
+	"TokenTestWork/internal/loggerer"
+
 	"net/http"
 )
 
@@ -17,11 +18,14 @@ import (
 //Потом Контейнеризирую
 
 func main() {
-	logger := logger.NewLogger()
-	logger.Info("Логер создан")
+	Logger := loggerer.NewLogger()
+	Logger.Info("Логер создан")
 
-	http.HandleFunc("/newToken", middleware.CreateAccessToken)
-	http.HandleFunc("/newToken", middleware.RefreshToken)
+	http.HandleFunc("/token", handlers.GenerateTokenHandler)
 
-	http.ListenAndServe(":8080", nil)
+	http.HandleFunc("/refresh", handlers.RefreshTokenHandler)
+
+	Logger.Println("Server started at :8080")
+	Logger.Fatal(http.ListenAndServe(":8080", nil))
+
 }
