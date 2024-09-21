@@ -2,7 +2,7 @@ package storage
 
 import (
 	"database/sql"
-
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 )
 
